@@ -56,3 +56,48 @@ For urgent fixes to a release:
 1. Create a hotfix branch from the release tag
 2. Make the necessary fixes
 3. Follow the regular release process with a patch version increment
+
+## Creating a New Release
+
+To create a new release, follow these detailed steps:
+
+1. **Prepare the Release:**
+   - Ensure all changes are committed and pushed to the main branch.
+   - Run all tests to ensure the codebase is stable.
+
+2. **Update Version:**
+   - Update the version number in the `VERSION` file.
+   - Update the version number in the `Dockerfile` and Kubernetes deployment configurations.
+
+3. **Update Documentation:**
+   - Update `CHANGELOG.md` with the new version's changes.
+   - Update any other relevant documentation files.
+
+4. **Run Release Script:**
+   - Perform a dry run of the release script:
+     ```bash
+     python scripts/release.py --version X.Y.Z --dry-run
+     ```
+   - If the dry run is successful, run the actual release script:
+     ```bash
+     python scripts/release.py --version X.Y.Z
+     ```
+
+5. **Create GitHub Release:**
+   - Go to GitHub Releases.
+   - Create a new release using the tag created by the release script.
+   - Copy the relevant section from `CHANGELOG.md` into the release description.
+   - Attach any additional artifacts if needed.
+
+6. **Deploy to Kubernetes:**
+   - Apply the updated Kubernetes deployment configurations:
+     ```bash
+     kubectl apply -f kubernetes/deployment.yaml
+     kubectl apply -f kubernetes/service.yaml
+     ```
+
+7. **Post-Release Verification:**
+   - Verify the deployment works in a staging environment.
+   - Monitor the production deployment for any issues.
+   - Update any relevant documentation websites.
+   - Announce the release in appropriate channels.
