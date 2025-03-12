@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xgboost-api
+  namespace: ml-apis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: xgboost-api
+  template:
+    metadata:
+      labels:
+        app: xgboost-api
+    spec:
+      containers:
+      - name: xgboost-api
+        image: bniladridas/flask-xgboost-api:latest
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: "2Gi"
+            cpu: "1"
+          requests:
+            nvidia.com/gpu: 1
+            memory: "1Gi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 10
