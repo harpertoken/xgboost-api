@@ -25,49 +25,69 @@ def parse_version(version: str) -> Tuple[int, int, int]:
 
 def update_version(new_version: str) -> None:
     """Update version in all necessary files."""
-    # Update VERSION file
-    with open(ROOT / "VERSION", "w") as f:
-        f.write(new_version + "\n")
-    
-    # Update Dockerfile
-    dockerfile_path = ROOT / "Dockerfile"
-    with open(dockerfile_path, "r") as f:
-        content = f.read()
-    with open(dockerfile_path, "w") as f:
-        f.write(content)
-    
-    # Update kubernetes deployments
-    deployment_path = ROOT / "kubernetes" / "deployment.yaml"
-    with open(deployment_path, "r") as f:
-        content = f.read()
-    content = re.sub(
-        r"bniladridas/flask-xgboost-api:.*",
-        f"bniladridas/flask-xgboost-api:{new_version}",
-        content
-    )
-    with open(deployment_path, "w") as f:
-        f.write(content)
+    try:
+        # Update VERSION file
+        with open(ROOT / "VERSION", "w") as f:
+            f.write(new_version + "\n")
+        
+        # Update Dockerfile
+        dockerfile_path = ROOT / "Dockerfile"
+        with open(dockerfile_path, "r") as f:
+            content = f.read()
+        with open(dockerfile_path, "w") as f:
+            f.write(content)
+        
+        # Update kubernetes deployments
+        deployment_path = ROOT / "kubernetes" / "deployment.yaml"
+        with open(deployment_path, "r") as f:
+            content = f.read()
+        content = re.sub(
+            r"bniladridas/flask-xgboost-api:.*",
+            f"bniladridas/flask-xgboost-api:{new_version}",
+            content
+        )
+        with open(deployment_path, "w") as f:
+            f.write(content)
+    except Exception as e:
+        print(f"Error updating version: {e}")
+        raise
 
 def create_release_branch(version: str) -> None:
     """Create and checkout a release branch."""
     branch_name = f"release-{version}"
-    subprocess.run(["git", "checkout", "-b", branch_name], check=True)
+    try:
+        subprocess.run(["git", "checkout", "-b", branch_name], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error creating release branch: {e}")
+        raise
 
 def create_release_commit(version: str) -> None:
     """Create a release commit."""
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", f"Release version {version}"], check=True)
+    try:
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "commit", "-m", f"Release version {version}"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error creating release commit: {e}")
+        raise
 
 def create_release_tag(version: str) -> None:
     """Create and push a release tag."""
     tag_name = f"v{version}"
-    subprocess.run(["git", "tag", "-a", tag_name, "-m", f"Release {tag_name}"], check=True)
+    try:
+        subprocess.run(["git", "tag", "-a", tag_name, "-m", f"Release {tag_name}"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error creating release tag: {e}")
+        raise
 
 def build_and_push_docker(version: str) -> None:
     """Build and push Docker image."""
     image_name = f"bniladridas/flask-xgboost-api:{version}"
-    subprocess.run(["docker", "build", "-t", image_name, "."], check=True)
-    subprocess.run(["docker", "push", image_name], check=True)
+    try:
+        subprocess.run(["docker", "build", "-t", image_name, "."], check=True)
+        subprocess.run(["docker", "push", image_name], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error building and pushing Docker image: {e}")
+        raise
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Release management script")
