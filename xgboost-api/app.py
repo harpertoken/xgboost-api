@@ -43,7 +43,12 @@ def predict():
 
 @app.route('/version', methods=['GET'])
 def version():
-    return jsonify({'version': '1.1.0'}), 200
+    try:
+        with open('VERSION', 'r') as f:
+            version = f.read().strip()
+        return jsonify({'version': version}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
