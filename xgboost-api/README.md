@@ -2,6 +2,10 @@
 
 A Flask-based API serving XGBoost predictions with GPU support.
 
+## Version
+
+Current version: 1.0.0 (see [CHANGELOG.md](CHANGELOG.md) for details)
+
 ## Project Structure
 ```
 xgboost-api/
@@ -61,3 +65,16 @@ kubectl apply -f kubernetes/service.yaml
 - NVIDIA GPU with CUDA support
 - Docker with NVIDIA Container Toolkit
 - Kubernetes cluster with NVIDIA device plugin
+
+## Releases
+
+For information about releases and versioning:
+
+- See [CHANGELOG.md](CHANGELOG.md) for version history
+- See [RELEASE.md](RELEASE.md) for release process
+- Check [GitHub Releases](https://github.com/your-username/xgboost-api/releases) for official releases
+
+To create a new release:
+```bash
+python scripts/release.py --version X.Y.Z
+```
