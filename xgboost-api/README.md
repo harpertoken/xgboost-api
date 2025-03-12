@@ -2,6 +2,10 @@
 
 A Flask-based API serving XGBoost predictions with GPU support.
 
+## Project Description
+
+This project provides an API service for XGBoost predictions with GPU support. It includes a Flask-based API with endpoints for health check and prediction, Docker containerization, and Kubernetes deployment configurations. The model training script is also included.
+
 ## Version
 
 Current version: 1.0.0 (see [CHANGELOG.md](CHANGELOG.md) for details)
@@ -58,6 +62,47 @@ kubectl apply -f kubernetes/service.yaml
 - `POST /predict`: Make predictions
   - Request body: `{"features": [array_of_features]}`
   - Response: `{"prediction": [prediction_values]}`
+
+## Using the API
+
+### Health Check Endpoint
+
+**Request:**
+```bash
+curl -X GET http://localhost:5000/health
+```
+
+**Response:**
+```json
+{
+  "status": "healthy"
+}
+```
+
+### Prediction Endpoint
+
+**Request:**
+```bash
+curl -X POST http://localhost:5000/predict -H "Content-Type: application/json" -d '{"features": [1.0, 2.0, 3.0, 4.0]}'
+```
+
+**Response:**
+```json
+{
+  "prediction": [0.123456789],
+  "shape": [1, 4]
+}
+```
+
+## Contributing
+
+We welcome contributions to the project! Here are some ways you can contribute:
+
+1. **Report Bugs**: If you find a bug, please report it by opening an issue on GitHub.
+2. **Suggest Features**: If you have an idea for a new feature, please suggest it by opening an issue on GitHub.
+3. **Submit Pull Requests**: If you want to contribute code, please fork the repository and submit a pull request with your changes.
+
+Please make sure to follow the project's coding standards and write tests for your changes.
 
 ## Requirements
 
