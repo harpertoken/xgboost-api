@@ -22,6 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Train model
+      run: python3 train.py
     - name: Build Docker image
       run: docker build -t xgboost-api .
     - name: Test Docker container
