@@ -49,7 +49,7 @@ Response: `{"id":"uuid","prediction":[0.99...],"shape":[1,4]}`
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.8+ (tested on 3.8 and 3.9)
 - Optional: NVIDIA GPU with CUDA support
 - For GPU: Docker with NVIDIA Container Toolkit, Kubernetes with NVIDIA device plugin
 
