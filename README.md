@@ -2,6 +2,8 @@
 
 Flask-based API for XGBoost predictions with GPU/CPU support.
 
+**Keywords:** python, flask, xgboost, machine-learning, api, docker, kubernetes, gpu
+
 ## Quick Start
 
 1. Install dependencies:
