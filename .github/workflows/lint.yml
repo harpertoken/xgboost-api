@@ -1,0 +1,17 @@
+name: Lint (Python 3.8)
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Install pylint
+      run: pip install pylint
+    - name: Run pylint
+      run: pylint app.py train.py tests/
