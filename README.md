@@ -62,19 +62,6 @@ export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
 ```
 
-## Development
-
-Run CI locally:
-```bash
-# Install act: https://github.com/nektos/act
-act -j test --container-architecture linux/amd64
-```
-
-Run lint locally:
-```bash
-act -j lint --container-architecture linux/amd64
-```
-
 ## Deployment
 
 Docker:
