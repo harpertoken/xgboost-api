@@ -2,6 +2,10 @@
 
 Flask-based API for XGBoost predictions with GPU/CPU support.
 
+## What is this?
+
+This repository provides a machine learning API using XGBoost, a popular gradient boosting library. It trains a model on sample data and serves predictions via HTTP endpoints. XGBoost is used for tasks like classification or regression, making this a machine learning application.
+
 **Keywords:** python, flask, xgboost, machine-learning, api, docker, kubernetes, gpu
 
 ## Quick Start
