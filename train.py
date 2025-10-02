@@ -1,5 +1,6 @@
 import numpy as np
 import xgboost as xgb
+import os
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 
@@ -22,13 +23,16 @@ def train_model():
         'eta': 0.3,
         'objective': 'binary:logistic',
         'eval_metric': 'logloss',
-        'tree_method': 'gpu_hist'  # Use GPU acceleration
+        'tree_method': 'hist'  # Use CPU for compatibility
     }
     
     # Train model
     num_rounds = 100
     model = xgb.train(params, dtrain, num_rounds)
-    
+
+    # Ensure model directory exists
+    os.makedirs('model', exist_ok=True)
+
     # Save model
     model.save_model('model/xgboost_model.json')
     print("Model saved successfully!")
