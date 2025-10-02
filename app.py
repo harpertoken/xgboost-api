@@ -2,11 +2,14 @@ from flask import Flask, request, jsonify
 import xgboost as xgb
 import numpy as np
 import os
+import uuid
 
 app = Flask(__name__)
 
 # Load model at startup
 model_path = os.path.join('model', 'xgboost_model.json')
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found: {model_path}. Please run 'python train.py' to train the model first.")
 model = xgb.Booster()
 model.load_model(model_path)
 
@@ -34,6 +37,7 @@ def predict():
         prediction = model.predict(dmatrix)
         
         return jsonify({
+            'id': str(uuid.uuid4()),
             'prediction': prediction.tolist(),
             'shape': features.shape
         })
@@ -51,4 +55,4 @@ def version():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)

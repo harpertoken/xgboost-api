@@ -21,7 +21,7 @@ COPY model/xgboost_model.json model/
 ENV CUDA_VISIBLE_DEVICES=0
 
 # Expose the port
-EXPOSE 5000
+EXPOSE 8000
 
 # Run the application
 CMD ["python3", "app.py"]

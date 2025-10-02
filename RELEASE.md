@@ -66,8 +66,7 @@ To create a new release, follow these detailed steps:
    - Run all tests to ensure the codebase is stable.
 
 2. **Update Version:**
-   - Update the version number in the `VERSION` file.
-   - Update the version number in the `Dockerfile` and Kubernetes deployment configurations.
+    - Update the version number in the `Dockerfile` and Kubernetes deployment configurations.
 
 3. **Update Documentation:**
    - Update `CHANGELOG.md` with the new version's changes.
