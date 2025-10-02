@@ -1,6 +1,6 @@
 # XGBoost API
 
-Flask-based API for XGBoost predictions with GPU/CPU support.
+Flask API for XGBoost ML predictions.
 
 ## What is this?
 
