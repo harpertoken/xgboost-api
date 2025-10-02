@@ -42,7 +42,7 @@ def predict():
             'shape': features.shape
         })
         
-    except Exception as e:
+    except (ValueError, TypeError, KeyError) as e:
         return jsonify({'error': str(e)}), 400
 
 @app.route('/version', methods=['GET'])
