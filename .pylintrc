@@ -1,2 +1,2 @@
 [MASTER]
-disable=missing-module-docstring,missing-function-docstring,import-error,invalid-name,unused-import,wrong-import-order,redefined-outer-name,unspecified-encoding,missing-final-newline,line-too-long,trailing-whitespace,too-few-public-methods,too-many-arguments,too-many-locals
+disable=import-error,invalid-name,line-too-long,missing-final-newline,missing-function-docstring,missing-module-docstring,redefined-outer-name,too-few-public-methods,trailing-whitespace,unspecified-encoding,unused-import,wrong-import-order
