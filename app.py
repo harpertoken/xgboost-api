@@ -3,6 +3,8 @@ import xgboost as xgb
 import numpy as np
 import os
 import uuid
+import json
+from werkzeug.exceptions import BadRequest
 
 app = Flask(__name__)
 
@@ -42,7 +44,7 @@ def predict():
             'shape': features.shape
         })
         
-    except Exception as e:
+    except (ValueError, TypeError, KeyError, json.JSONDecodeError, BadRequest) as e:
         return jsonify({'error': str(e)}), 400
 
 @app.route('/version', methods=['GET'])

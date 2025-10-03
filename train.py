@@ -11,11 +11,10 @@ def create_sample_data():
 
 def train_model():
     # Create sample data
-    X_train, X_test, y_train, y_test = create_sample_data()
+    X_train, _X_test, y_train, _y_test = create_sample_data()
     
     # Convert to DMatrix format
     dtrain = xgb.DMatrix(X_train, label=y_train)
-    dtest = xgb.DMatrix(X_test, label=y_test)
     
     # Set parameters
     params = {
