@@ -31,6 +31,37 @@ This repository provides a machine learning API using XGBoost, a popular gradien
    python app.py
    ```
 
+## Conventional Commits
+
+This project follows conventional commit standards for commit messages.
+
+### Setup
+
+To enable commit message validation:
+
+```bash
+cp scripts/commit-msg .git/hooks/commit-msg
+chmod +x .git/hooks/commit-msg
+```
+
+### Commit Message Format
+
+Commit messages must:
+- Start with a type: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`, `perf:`, `ci:`, `build:`, `revert:`
+- Be entirely lowercase
+- Have first line ≤60 characters
+
+Example: `feat: add user authentication endpoint`
+
+### Rewriting History
+
+To clean up existing commit messages:
+
+```bash
+git filter-branch --msg-filter 'bash scripts/rewrite_msg.sh' -- --all
+git push --force-with-lease
+```
+
 ## API Endpoints
 
 - `GET /health`: Health check
