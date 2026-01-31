@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import xgboost as xgb
+from xgboost.core import XGBoostError
 import numpy as np
 import os
 import uuid
@@ -19,7 +20,7 @@ if not os.path.exists(model_path):
 try:
     model = xgb.Booster()
     model.load_model(model_path)
-except Exception as e:
+except XGBoostError as e:
     raise RuntimeError(f"Failed to load model from {model_path}: {str(e)}") from e
 
 
