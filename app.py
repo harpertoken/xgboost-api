@@ -20,7 +20,7 @@ try:
     model = xgb.Booster()
     model.load_model(model_path)
 except Exception as e:
-    raise RuntimeError(f"Failed to load model from {model_path}: {str(e)}")
+    raise RuntimeError(f"Failed to load model from {model_path}: {str(e)}") from e
 
 
 @app.route("/health", methods=["GET"])
